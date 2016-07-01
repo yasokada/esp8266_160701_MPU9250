@@ -28,9 +28,9 @@ void MPU_setup() {
   pinMode(INTERRUPT_PIN, INPUT);
 
   if (mpu.testConnection()) { // TODO: NG occurred
-    Serial.println("MPU connect OK");
+    Serial.println( F("MPU connect OK") );
   } else {
-    Serial.println("MPU connect NG");    
+    Serial.println( F("MPU connect NG") );
   }
 
   uint8_t devStatus = mpu.dmpInitialize();
@@ -47,14 +47,17 @@ void MPU_setup() {
 //    uint8_t mpuIntStatus = mpu.getIntStatus();
     dmpReady = true;
     packetSize = mpu.dmpGetFIFOPacketSize();
-    Serial.println("DMP initialize: OK");
+    Serial.println( F("DMP initialize: OK") );
   } else {
     // error
-    Serial.println("DMP initialize: NG");
+    Serial.println( F("DMP initialize: NG") );
   }
 }
 
 void setup() {
+#if 1
+  WiFi.disconnect();
+#endif  
   Serial.begin(115200);
   MPU_setup();
 }
@@ -77,7 +80,7 @@ void loop() {
 
   if ( (mpuIntStatus & 0x10) || (fifoCount == 1024) ) {
     mpu.resetFIFO();
-    Serial.println("FIFO overflow!");
+    Serial.println( F("FIFO overflow!") );
   } else if (mpuIntStatus & 0x02) {
       while(fifoCount < packetSize) {
         fifoCount = mpu.getFIFOCount();
