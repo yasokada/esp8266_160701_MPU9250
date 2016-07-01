@@ -47,15 +47,16 @@ void MPU_setup() {
 //    uint8_t mpuIntStatus = mpu.getIntStatus();
     dmpReady = true;
     packetSize = mpu.dmpGetFIFOPacketSize();
+    Serial.println("DMP initialize: OK");
   } else {
     // error
+    Serial.println("DMP initialize: NG");
   }
 }
 
 void setup() {
   Serial.begin(115200);
   MPU_setup();
-
 }
 
 void loop() {
