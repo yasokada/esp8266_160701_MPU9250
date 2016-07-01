@@ -55,9 +55,7 @@ void MPU_setup() {
 }
 
 void setup() {
-#if 1
   WiFi.disconnect();
-#endif  
   Serial.begin(115200);
   MPU_setup();
 }
@@ -90,15 +88,15 @@ void loop() {
 
       fifoCount -= packetSize;
 
-      Quaternion q;           // [w, x, y, z]
-      mpu.dmpGetQuaternion(&q, fifoBuffer);
+      Quaternion qtn; // [w, x, y, z]
+      mpu.dmpGetQuaternion(&qtn, fifoBuffer);
       Serial.print("quat\t");
-      Serial.print(q.w);      
+      Serial.print(qtn.w);      
       Serial.print("\t");
-      Serial.print(q.x);      
+      Serial.print(qtn.x);      
       Serial.print("\t");
-      Serial.print(q.y);      
+      Serial.print(qtn.y);      
       Serial.print("\t");
-      Serial.println(q.z);      
+      Serial.println(qtn.z);      
   }
 }
