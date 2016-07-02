@@ -1,4 +1,8 @@
 /*
+ * v0.3 2016 Jul. 02
+ *   - change interval from 100Hz to 1HZ
+ *     + modify [MPU9150_9Axis_MotionApps41.h] for 1Hz
+ *     + add MPU9150_9Axis_MotionApps41.h (copied from Arduino\libraries\)
  * v0.2 2016 Jul. 01
  *   - based on MPU6050_DMP6 (6/21/2012 by Jeff Rowberg <jeff@rowberg.net>)
  */
@@ -85,7 +89,6 @@ void loop() {
       }
 
       mpu.getFIFOBytes(fifoBuffer, packetSize);
-
       fifoCount -= packetSize;
 
       Quaternion qtn; // [w, x, y, z]
